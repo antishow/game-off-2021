@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4171fe64c70c343d1ac56a2a04d108bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleScreenInPlayMode: 1
+  titleScreenInPlayMode: 0
   OnPause:
     m_PersistentCalls:
       m_Calls: []
