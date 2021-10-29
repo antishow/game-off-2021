@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
 
 		Vector3 move = transform.right * input.x + transform.forward * input.y;
 		characterController.Move(move * Time.deltaTime * playerSpeed);
-		velocity.y += -Physics.gravity.magnitude * Time.deltaTime;
+		velocity += Physics.gravity * Time.deltaTime;
 		characterController.Move(velocity * Time.deltaTime);
 	}
 }

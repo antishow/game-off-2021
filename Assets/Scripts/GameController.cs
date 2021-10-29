@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
@@ -13,11 +14,27 @@ public class GameController : MonoBehaviour
 
 	public bool titleScreenInPlayMode;
 
+	public UnityEvent OnPause;
+	public UnityEvent OnUnpause;
+
 	void Start()
 	{
 		if(!Application.isEditor || titleScreenInPlayMode) {
 			StartCoroutine(GoToTitleScreen());
 		}
+	}
+
+	public void Pause()
+	{
+		Debug.Log("Paused");
+		Time.timeScale = 0;
+		OnPause.Invoke();
+	}
+
+	public void Unpause()
+	{
+		Time.timeScale = 1;
+		OnUnpause.Invoke();
 	}
 
 	private IEnumerator _pruneScenes()
