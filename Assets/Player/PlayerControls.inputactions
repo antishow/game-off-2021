@@ -28,6 +28,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Point",
+                    "type": "Button",
+                    "id": "5ee64959-3d90-462d-9bec-7b369c5729dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap"
+                },
+                {
+                    "name": "Cursor",
+                    "type": "Value",
+                    "id": "55f8d689-7041-4e40-911d-44bff76bd442",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -105,6 +121,28 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1240b32a-982c-4f96-9c5e-802437384d59",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ac59f9b-769c-4ce0-90ad-8d374c0d773c",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Cursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
