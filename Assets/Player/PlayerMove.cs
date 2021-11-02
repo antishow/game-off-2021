@@ -66,8 +66,13 @@ public class PlayerMove : MonoBehaviour
 		}
 		else if (input != Vector2.zero)
 		{
-			move = transform.right * input.x + transform.forward * input.y;
-			move *= Time.deltaTime * playerSpeed;
+			float frameSpeed = Time.deltaTime * playerSpeed;
+			move = frameSpeed * (transform.right * input.x + transform.forward * input.y);
+			NavMeshHit hit;
+			if (NavMesh.SamplePosition(transform.position + move, out hit, frameSpeed * 2, NavMesh.AllAreas))
+			{
+				move = hit.position - transform.position;
+			}
 		}
 
 		characterController.Move(move);
