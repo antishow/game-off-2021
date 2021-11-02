@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
 
 	private IEnumerator _loadGameScene(string scene)
 	{
-		StartCoroutine(_pruneScenes());
+		yield return StartCoroutine(_pruneScenes());
 
 		List<AsyncOperation> loading = gameBaseScenes
 		 .Select(s => SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive))
