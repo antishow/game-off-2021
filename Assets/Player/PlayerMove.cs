@@ -17,15 +17,27 @@ public class PlayerMove : MonoBehaviour
 
 	public float playerSpeed = 5f;
 
+	void OnDrawGizmos()
+	{
+		if (navMeshAgent)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(navMeshAgent.destination, 0.5f);
+		}
+	}
+
 	void Awake()
 	{
 		characterController = GetComponent<CharacterController>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
+		navMeshAgent.updatePosition = false;
+		navMeshAgent.updateRotation = false;
 	}
 
 	void OnMove(InputValue value)
 	{
 		input = value.Get<Vector2>();
+		navMeshAgent.enabled = false;
 	}
 
 	void OnPoint(InputValue value)
@@ -39,23 +51,25 @@ public class PlayerMove : MonoBehaviour
 		if (Physics.Raycast(ray, out hit))
 		{
 			Debug.LogFormat("Clicked on {0} at {1}", hit.transform.gameObject.name, hit.point);
+			navMeshAgent.enabled = true;
+			navMeshAgent.destination = hit.point;
 		}
 	}
 
 	void Update()
 	{
-		if (characterController.isGrounded && velocity.y < 0)
+		Vector3 move = Vector3.zero;
+
+		if (navMeshAgent.enabled && navMeshAgent.remainingDistance >= 0.01)
 		{
-			velocity.y = 0f;
+			move = navMeshAgent.nextPosition - transform.position;
+		}
+		else if (input != Vector2.zero)
+		{
+			move = transform.right * input.x + transform.forward * input.y;
+			move *= Time.deltaTime * playerSpeed;
 		}
 
-		if (input != Vector2.zero)
-		{
-			Vector3 move = transform.right * input.x + transform.forward * input.y;
-			characterController.Move(move * Time.deltaTime * playerSpeed);
-		}
-
-		velocity += Physics.gravity * Time.deltaTime;
-		characterController.Move(velocity * Time.deltaTime);
+		characterController.Move(move);
 	}
 }
